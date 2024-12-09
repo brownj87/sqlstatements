@@ -1,0 +1,108 @@
+import sqlite3
+# Establish a connection to the database (or create it if it doesn't exist)
+conn = sqlite3.connect('phone_database.db')
+# Create a cursor object to execute SQL commands
+cursor = conn.cursor()
+# SQL statement to create the phone table
+create_table_sql = '''
+CREATE TABLE IF NOT EXISTS phone (
+    phone_id INTEGER PRIMARY KEY,
+    country_code INTEGER NOT NULL,
+    phone_number INTEGER NOT NULL,
+    phone_type TEXT
+);
+'''
+# Execute the SQL statement to create the table
+cursor.execute(create_table_sql)
+# Commit the transaction to save changes
+conn.commit()
+# Close the cursor and connection
+cursor.close()
+conn.close()
+print("Table 'phone' created successfully.")
+
+import sqlite3
+# Establish a connection to the database
+conn = sqlite3.connect('phone_database.db')
+# Create a cursor object to execute SQL commands
+cursor = conn.cursor()
+# SQL statement to select phone_number where country_code is 'US'
+select_sql = '''
+SELECT phone_number
+FROM phone
+WHERE country_code = 'US';
+'''
+# Execute the SQL query
+cursor.execute(select_sql)
+# Fetch all rows that match the query
+rows = cursor.fetchall()
+# Loop through the rows and print each phone_number
+for row in rows:
+    print(row[0])  # row[0] is the first column in the result, which is phone_number
+# Close the cursor and connection
+cursor.close()
+conn.close()
+
+import sqlite3
+# Establish a connection to the database
+conn = sqlite3.connect('phone_database.db')
+# Create a cursor object to execute SQL commands
+cursor = conn.cursor()
+# SQL statement to update phone_type from 'CELLULAR' to 'MOBILE'
+update_sql = '''
+UPDATE phone
+SET phone_type = 'MOBILE'
+WHERE phone_type = 'CELLULAR';
+'''
+# Execute the SQL query
+cursor.execute(update_sql)
+# Commit the changes to the database
+conn.commit()
+# Print the number of rows updated
+print(f"{cursor.rowcount} rows updated.")
+# Close the cursor and connection
+cursor.close()
+conn.close()
+
+import sqlite3
+# Establish a connection to the database (replace with your database file if needed)
+conn = sqlite3.connect('phone_database.db')
+# Create a cursor object to execute SQL commands
+cursor = conn.cursor()
+# SQL statement to delete rows where country_code is 'XX'
+delete_sql = '''
+DELETE FROM phone
+WHERE country_code = 'XX';
+'''
+# Execute the SQL query to delete rows
+cursor.execute(delete_sql)
+# Commit the transaction to apply the changes
+conn.commit()
+# Print the number of rows deleted
+print(f"{cursor.rowcount} rows deleted.")
+# Close the cursor and connection
+cursor.close()
+conn.close()
+
+import sqlite3
+# Establish a connection to the database
+conn = sqlite3.connect('phone_database.db')
+# Create a cursor object to execute SQL commands
+cursor = conn.cursor()
+# SQL statement to drop the phone table
+drop_table_sql = '''
+DROP TABLE IF EXISTS phone;
+'''
+# Execute the SQL query to drop the table
+cursor.execute(drop_table_sql)
+# Commit the transaction (though DROP TABLE does not require commit in most cases)
+conn.commit()
+# Print confirmation message
+print("Table 'phone' has been dropped.")
+# Close the cursor and connection
+cursor.close()
+conn.close()
+
+
+
+
